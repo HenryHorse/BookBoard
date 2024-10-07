@@ -1,0 +1,12 @@
+:root {
+    --color-background-header: rgba(55, 28, 1, 0.93);
+    --color-background-page: rgb(159, 115, 85);
+    --color-background-section: rgb(66, 104, 67);
+    --color-hover: rgb(131 126 246);
+    --color-text: rgb(246, 229, 219);
+    --color-border-section: rgb(69, 151, 73);
+    --color-border-header: rgb(117, 82, 38);
+
+    --style-border-section: solid;
+    --style-border-header: solid;
+}
