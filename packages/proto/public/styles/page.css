@@ -4,9 +4,12 @@ header {
     border-style: var(--style-border-header);
     border-color: var(--color-border-header);
     padding: 1em;
+    font-family: 'Lobster Two', sans-serif;
+    font-weight: 700;
 }
 header a {
     color: var(--color-text);
+
 }
 header a:hover {
     color: var(--color-hover);
@@ -18,6 +21,7 @@ section {
     border-color: var(--color-border-section);
     margin-top: 1em;
     padding: 1em;
+    font-family: 'EB Garamond', serif;
 }
 section a {
     color: var(--color-text);
@@ -27,4 +31,11 @@ section a:hover {
 }
 body {
     background-color: var(--color-background-page);
+}
+svg.icon {
+    display: inline;
+    height: 2em;
+    width: 2em;
+    vertical-align: bottom;
+    fill: currentColor;
 }
