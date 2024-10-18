@@ -16,9 +16,10 @@
         grid-template-columns: 1fr;
         grid-template-areas:
             "page-title"
-	    "author"
+	        "author"
             "genre"
-            "year";
+            "year"
+            "description";
     }
     .page ul {
         grid-template-columns: 1fr;
