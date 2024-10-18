@@ -1,33 +1,62 @@
 header {
+    display: flex;
+    justify-content: space-between;
     color: var(--color-text);
     background-color: var(--color-background-header);
-    border-style: var(--style-border-header);
-    border-color: var(--color-border-header);
     padding: 1em;
     font-family: 'Lobster Two', sans-serif;
     font-weight: 700;
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
 }
 header a {
     color: var(--color-text);
-
 }
 header a:hover {
     color: var(--color-hover);
+}
+.page-title {
+    background-color: var(--color-title);
+    border-color: var(--color-title);
+    padding: 0.5em 1em;
+    font-size: 2em;
+    border-radius: 8px;
+    margin: auto auto;
+    grid-area: page-title;
+
+}
+.left-header {
+    display: flex;
+    flex-direction: column;
+}
+.right-header {
+    display: flex;
+    font-family: 'EB Garamond', serif;
+    background-color: var(--color-background-login);
+    padding: 1.5em;
+    margin: 0;
+    box-shadow: var(--shadow);
 }
 section {
     color: var(--color-text);
     background-color: var(--color-background-section);
     border-style: var(--style-border-section);
     border-color: var(--color-border-section);
-    margin-top: 1em;
-    padding: 1em;
+    padding: 1rem;
     font-family: 'EB Garamond', serif;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
 }
 section a {
     color: var(--color-text);
 }
 section a:hover {
     color: var(--color-hover);
+}
+section h2 {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 }
 body {
     background-color: var(--color-background-page);
@@ -38,4 +67,29 @@ svg.icon {
     width: 2em;
     vertical-align: bottom;
     fill: currentColor;
+}
+.active {
+    color: var(--color-active-nav);
+}
+.genres {
+    grid-area: genres;
+}
+.authors {
+    grid-area: authors;
+}
+
+.books {
+    grid-area: books;
+}
+.years {
+    grid-area: years;
+}
+.page {
+    row-gap: var(--section-row-gap);
+    column-gap: var(--section-column-gap);
+}
+.page ul {
+    display: grid;
+    grid-template-columns: var(--home-column-split); /* The repeat() ensures equal width, and stops the boxes from changing size when not full */
+    gap: 1rem;
 }

@@ -1,0 +1,12 @@
+.page {
+    display: grid;
+    grid-template-areas:
+        "page-title page-title page-title page-title page-title"
+        "books books books genres years";
+}
+.page ul {
+    grid-template-columns: var(--page-column-split);
+}
+
+
+

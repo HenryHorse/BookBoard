@@ -3,73 +3,92 @@
     <head>
         <meta charset="utf-8" />
         <title>Way of Kings</title>
+        <link rel="stylesheet" href="/styles/reset.css"/>
         <link rel="stylesheet" href="/styles/tokens.css"/>
         <link rel="stylesheet" href="/styles/page.css"/>
+        <link rel="stylesheet" href="/styles/book.css"/>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     </head>
     <body>
         <header>
-            <a href="../index.html">&larr; Book Board</a>
+            <div class="left-header">
+                <h1>
+                    Book Board
+                </h1>
+                <nav>
+                    <a href="/index.html">Home</a>
+                    <a href="/books.html">Books</a>
+                    <a href="/genres.html">Genres</a>
+                    <a href="/authors.html">Authors</a>
+                    <a href="/years.html">Years</a>
+                </nav>
+            </div>
+            <div class="right-header">
+                <a href="">Login</a>
+            </div>
         </header>
 
-        <section>
-            <h2>
-                <svg class="icon">
-                    <use href="/icons/books.svg#icon-love"/>
-                </svg>
-                Genre
-            </h2>
-            <ul>
-                <li>
-                    <a href="../genres/fantasy.html">Fantasy</a>
-                </li>
-            </ul>
-        </section>
 
-        <section>
-            <h2>
-                <svg class="icon">
-                    <use href="/icons/books.svg#icon-time"/>
-                </svg>
-                Year
-            </h2>
-            <ul>
-                <li>
-                    <a href="../years/2010.html">2010</a>
-                </li>
-            </ul>
-        </section>
+        <div class="page">
 
-        <section>
-            <h2>
-                <svg class="icon">
-                    <use href="/icons/books.svg#icon-idea"/>
-                </svg>
-                Author
-            </h2>
-            <ul>
-                <li>
-                    <a href="../authors/brandonsanderson.html">Brandon Sanderson</a>
-                </li>
-            </ul>
-        </section>
+            <section class="page-title">
+                The Way of Kings
+            </section>
 
+            <section class="description">
+                <h2>Description</h2>
+                <p>This book is about Roshar, and the people who inhabit it.</p>
+            </section>
 
-        <section>
-            <h2>
-                <svg class="icon">
-                    <use href="/icons/books.svg#icon-review"/>
-                </svg>
-                Reviews
-            </h2>
-            <ul>
-                <li>
-                    <a href="../reviews/review1.html">Review 1</a>
-                </li>
-            </ul>
-        </section>
+            <section class="genre">
+                <h2>
+                    <svg class="icon">
+                        <use href="/icons/books.svg#icon-love"/>
+                    </svg>
+                    Genre
+                </h2>
+                <ul>
+                    <li>
+                        <a href="../genres/fantasy.html">Fantasy</a>
+                    </li>
+                    <li>waka</li>
+                    <li>waka</li>
+                    <li>waka</li>
+                    <li>waka</li>
+                </ul>
+            </section>
+
+            <section class="year">
+                <h2>
+                    <svg class="icon">
+                        <use href="/icons/books.svg#icon-time"/>
+                    </svg>
+                    Year
+                </h2>
+                <ul>
+                    <li>
+                        <a href="../years/2010.html">2010</a>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="author">
+                <h2>
+                    <svg class="icon">
+                        <use href="/icons/books.svg#icon-idea"/>
+                    </svg>
+                    Author
+                </h2>
+                <ul>
+                    <li>
+                        <a href="../authors/brandonsanderson.html">Brandon Sanderson</a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+
     </body>
 </html>
 
