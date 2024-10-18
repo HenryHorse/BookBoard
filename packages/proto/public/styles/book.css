@@ -11,3 +11,16 @@
 .page ul {
     grid-template-columns: var(--page-column-split);
 }
+@media (max-width: 480px) {
+    .page {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "page-title"
+	    "author"
+            "genre"
+            "year";
+    }
+    .page ul {
+        grid-template-columns: 1fr;
+    }
+}

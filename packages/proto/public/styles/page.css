@@ -81,6 +81,15 @@ svg.icon {
 .years {
     grid-area: years;
 }
+.author {
+	grid-area: author;
+}
+.year {
+	grid-area: year;
+}
+.genre {
+	grid-area: genre;
+}
 .page {
     row-gap: var(--section-row-gap);
     column-gap: var(--section-column-gap);

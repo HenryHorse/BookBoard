@@ -8,3 +8,16 @@
     display: grid;
     grid-template-columns: var(--page-column-split);
 }
+@media (max-width: 480px) {
+    .page {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "page-title"
+	    "books"
+            "authors"
+            "genres";
+    }
+    .page ul {
+        grid-template-columns: 1fr;
+    }
+}
