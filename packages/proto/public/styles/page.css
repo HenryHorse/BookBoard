@@ -3,11 +3,10 @@ header {
     justify-content: space-between;
     color: var(--color-text);
     background-color: var(--color-background-header);
-    padding: 1em;
-    font-family: 'Lobster Two', sans-serif;
-    font-weight: 700;
+    padding: var(--header-padding);
+    font-family: var(--font-family-header);
     box-shadow: var(--shadow);
-    margin-bottom: 1rem;
+    margin-bottom: var(--header-margin-bottom);
 }
 header a {
     color: var(--color-text);
@@ -18,9 +17,8 @@ header a:hover {
 .page-title {
     background-color: var(--color-title);
     border-color: var(--color-title);
-    padding: 0.5em 1em;
-    font-size: 2em;
-    border-radius: 8px;
+    padding: var(--title-padding);
+    font-size: var(--title-font-size);
     margin: auto auto;
     grid-area: page-title;
 
@@ -29,12 +27,11 @@ header a:hover {
     display: flex;
     flex-direction: column;
 }
-.right-header {
+.login {
     display: flex;
-    font-family: 'EB Garamond', serif;
+    font-family: var(--font-family-login);
     background-color: var(--color-background-login);
-    padding: 1.5em;
-    margin: 0;
+    padding: var(--login-padding);
     box-shadow: var(--shadow);
 }
 section {
@@ -42,9 +39,9 @@ section {
     background-color: var(--color-background-section);
     border-style: var(--style-border-section);
     border-color: var(--color-border-section);
-    padding: 1rem;
-    font-family: 'EB Garamond', serif;
-    border-radius: 8px;
+    padding: var(--section-padding);
+    font-family: var(--font-family-section);
+    border-radius: var(--section-border-radius);
     box-shadow: var(--shadow);
 }
 section a {
@@ -63,8 +60,8 @@ body {
 }
 svg.icon {
     display: inline;
-    height: 2em;
-    width: 2em;
+    height: var(--icon-height);
+    width: var(--icon-width);
     vertical-align: bottom;
     fill: currentColor;
 }
@@ -88,8 +85,9 @@ svg.icon {
     row-gap: var(--section-row-gap);
     column-gap: var(--section-column-gap);
 }
+
 .page ul {
     display: grid;
     grid-template-columns: var(--home-column-split); /* The repeat() ensures equal width, and stops the boxes from changing size when not full */
-    gap: 1rem;
+    gap: var(--list-gap);
 }

@@ -4,3 +4,11 @@
         "books books"
         "genres authors";
 }
+@media (max-width: 480px) {
+    .page {
+        grid-template-areas:
+            "books"
+            "genres"
+            "authors";
+    }
+}
