@@ -10,10 +10,9 @@
 }
 @media (max-width: 480px) {
     .page {
-        grid-template-columns: 1fr;
         grid-template-areas:
             "page-title"
-	    "books"
+            "books"
             "authors"
             "genres";
     }
