@@ -7,11 +7,7 @@
 }
 @media (max-width: 480px) {
     .page {
-	grid-template-columns: 1fr;
-        grid-template-areas:
-            "books"
-            "genres"
-            "authors";
+	    grid-template-columns: 1fr;
     }
     .page ul {
         grid-template-columns: 1fr;

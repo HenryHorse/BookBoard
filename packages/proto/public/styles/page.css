@@ -94,9 +94,20 @@ svg.icon {
     row-gap: var(--section-row-gap);
     column-gap: var(--section-column-gap);
 }
-
 .page ul {
     display: grid;
     grid-template-columns: var(--home-column-split); /* The repeat() ensures equal width, and stops the boxes from changing size when not full */
     gap: var(--list-gap);
+}
+@media (max-width: 480px) {
+    .page {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "books"
+            "genres"
+            "authors";
+    }
+    .page ul {
+        grid-template-columns: 1fr;
+    }
 }
