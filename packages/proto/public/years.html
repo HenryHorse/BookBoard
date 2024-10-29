@@ -10,6 +10,21 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+        <script type="importmap">
+            {
+              "imports": {
+                "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+              }
+            }
+        </script>
+        <script type="module">
+            import { define } from "@calpoly/mustang";
+            import {YearListElement} from "/scripts/years.js";
+
+            define({
+                "year-list": YearListElement
+            });
+        </script>
     </head>
     <body>
         <header>
@@ -32,17 +47,13 @@
 
         <div class="page">
             <section>
-                <h2>
-                    <svg class="icon">
-                        <use href="/icons/books.svg#icon-time"/>
-                    </svg>
-                    Years
-                </h2>
-                <ul>
-                    <li>
-                        <a href="years/2010.html">2010</a>
-                    </li>
-                </ul>
+                <year-list>
+                    <ul slot="year-list">
+                        <li>
+                            <a href="years/2010.html">2010</a>
+                        </li>
+                    </ul>
+                </year-list>
             </section>
         </div>
     </body>

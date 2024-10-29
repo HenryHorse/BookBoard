@@ -10,6 +10,25 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+        <script type="importmap">
+            {
+              "imports": {
+                "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+              }
+            }
+        </script>
+        <script type="module">
+            import { define } from "@calpoly/mustang";
+            import { BookListElement } from "/scripts/books.js";
+            import { AuthorListElement} from "/scripts/authors.js";
+            import {GenreListElement} from "/scripts/genres.js";
+
+            define({
+                "book-list": BookListElement,
+                "author-list": AuthorListElement,
+                "genre-list": GenreListElement
+            });
+        </script>
     </head>
     <body>
         <header>
@@ -35,45 +54,33 @@
             </section>
 
             <section class="books">
-                <h2>
-                    <svg class="icon">
-                        <use href="/icons/books.svg#icon-books"/>
-                    </svg>
-                    Books
-                </h2>
-                <ul>
-                    <li>
-                        <a href="../books/wayofkings.html">The Way of Kings</a>
-                    </li>
-                </ul>
+                <book-list>
+                    <ul slot="book-list">
+                        <li>
+                            <a href="../books/wayofkings.html">The Way of Kings</a>
+                        </li>
+                    </ul>
+                </book-list>
             </section>
 
             <section class="authors">
-                <h2>
-                    <svg class="icon">
-                        <use href="/icons/books.svg#icon-idea"/>
-                    </svg>
-                    Authors
-                </h2>
-                <ul>
-                    <li>
-                        <a href="../authors/brandonsanderson.html">Brandon Sanderson</a>
-                    </li>
-                </ul>
+                <author-list>
+                    <ul slot="author-list">
+                        <li>
+                            <a href="../authors/brandonsanderson.html">Brandon Sanderson</a>
+                        </li>
+                    </ul>
+                </author-list>
             </section>
 
             <section class="genres">
-                <h2>
-                    <svg class="icon">
-                        <use href="/icons/books.svg#icon-love"/>
-                    </svg>
-                    Genres
-                </h2>
-                <ul>
-                    <li>
-                        <a href="../genres/fantasy.html">Fantasy</a>
-                    </li>
-                </ul>
+                <genre-list>
+                    <ul slot="genre-list">
+                        <li>
+                            <a href="../genres/fantasy.html">Fantasy</a>
+                        </li>
+                    </ul>
+                </genre-list>
             </section>
         </div>
     </body>

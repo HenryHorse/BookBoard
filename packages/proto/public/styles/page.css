@@ -96,7 +96,7 @@ svg.icon {
 }
 .page ul {
     display: grid;
-    grid-template-columns: var(--home-column-split); /* The repeat() ensures equal width, and stops the boxes from changing size when not full */
+    grid-template-columns: var(--home-column-split);
     gap: var(--list-gap);
 }
 @media (max-width: 480px) {

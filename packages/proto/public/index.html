@@ -26,6 +26,10 @@
                     <a href="/years.html">Years</a>
                 </nav>
             </div>
+            <label onchange="event.stopPropagation(); toggleDarkMode(document.body, event.target.checked)">
+                <input type="checkbox"/>
+                Dark Mode
+            </label>
             <div class="login">
                 <a href="">Login</a>
             </div>
@@ -78,5 +82,6 @@
             </section>
 
         </div>
+        <script type="module" src="/scripts/darkModeToggle.js"></script>
     </body>
 </html>

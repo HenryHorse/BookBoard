@@ -10,6 +10,25 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+        <script type="importmap">
+            {
+              "imports": {
+                "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+              }
+            }
+        </script>
+        <script type="module">
+            import { define } from "@calpoly/mustang";
+            import { GenreListElement } from "/scripts/genres.js";
+            import { AuthorListElement} from "/scripts/authors.js";
+            import {YearListElement} from "/scripts/years.js";
+
+            define({
+                "genre-list": GenreListElement,
+                "author-list": AuthorListElement,
+                "year-list": YearListElement
+            });
+        </script>
     </head>
     <body>
         <header>
@@ -43,49 +62,37 @@
             </section>
 
             <section class="genre">
-                <h2>
-                    <svg class="icon">
-                        <use href="/icons/books.svg#icon-love"/>
-                    </svg>
-                    Genre
-                </h2>
-                <ul>
-                    <li>
-                        <a href="../genres/fantasy.html">Fantasy</a>
-                    </li>
-                    <li>waka</li>
-                    <li>waka</li>
-                    <li>waka</li>
-                    <li>waka</li>
-                </ul>
+                <genre-list>
+                    <ul slot="genre-list">
+                        <li>
+                            <a href="../genres/fantasy.html">Fantasy</a>
+                        </li>
+                        <li>waka</li>
+                        <li>waka</li>
+                        <li>waka</li>
+                        <li>waka</li>
+                    </ul>
+                </genre-list>
             </section>
 
             <section class="year">
-                <h2>
-                    <svg class="icon">
-                        <use href="/icons/books.svg#icon-time"/>
-                    </svg>
-                    Year
-                </h2>
-                <ul>
-                    <li>
-                        <a href="../years/2010.html">2010</a>
-                    </li>
-                </ul>
+                <year-list>
+                    <ul slot="year-list">
+                        <li>
+                            <a href="../years/2010.html">2010</a>
+                        </li>
+                    </ul>
+                </year-list>
             </section>
 
             <section class="author">
-                <h2>
-                    <svg class="icon">
-                        <use href="/icons/books.svg#icon-idea"/>
-                    </svg>
-                    Author
-                </h2>
-                <ul>
-                    <li>
-                        <a href="../authors/brandonsanderson.html">Brandon Sanderson</a>
-                    </li>
-                </ul>
+                <author-list>
+                    <ul slot="author-list">
+                        <li>
+                            <a href="../authors/brandonsanderson.html">Brandon Sanderson</a>
+                        </li>
+                    </ul>
+                </author-list>
             </section>
         </div>
 
