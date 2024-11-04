@@ -36,4 +36,42 @@ export class AuthorListElement extends HTMLElement {
             .template(AuthorListElement.template)
             .styles(reset.styles, AuthorListElement.styles);
     }
+
+    get src() {
+        return this.getAttribute("src");
+    }
+
+    connectedCallback() {
+        if (this.src) this.hydrate(this.src);
+    }
+
+    hydrate(url) {
+        fetch(url)
+            .then((res) => {
+                if (res.status !== 200) throw `Status: ${res.status}`;
+                return res.json();
+            })
+            .then((json) => this.renderSlots(json))
+            .catch((error) =>
+                console.log(`Failed to render data ${url}:`, error)
+            );
+    }
+
+    renderSlots(json) {
+        const authors = json.author;
+        if (authors) {
+            const authorList = html`
+                <ul slot="author-list">
+                    ${authors.map((author) => html`
+                            <li>
+                                <a href="../authors/${author._id}">${author.name}</a>
+                            </li>
+                        `)}
+                </ul>`;
+            this.replaceChildren(authorList);
+        }
+        else {
+            console.warn("No publication year found in book data.")
+        }
+    }
 }

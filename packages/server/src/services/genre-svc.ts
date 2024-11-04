@@ -1,32 +1,6 @@
 
-import { Genre } from "../models/Genre";
-import {Year} from "../models";
-import { Schema, model } from "mongoose";
-
-const genres: Record<string, Genre> = {
-    Fantasy: {
-        name: "Fantasy",
-        authors: [],
-        books: [],
-        years: []
-    }
-};
-
-export function getGenre(_: string): Genre {
-    return genres['Fantasy'];
-}
-
-const GenreSchema = new Schema<Genre>(
-    {
-        name: { type: String, required: true, trim: true},
-        authors: [{ type: Schema.Types.ObjectId, ref: "Author"}],
-        books: [{ type: Schema.Types.ObjectId, ref: "Book"}],
-        years: [{ type: Schema.Types.ObjectId, ref: "Year"}],
-    },
-    { collection: "genres"}
-);
-
-const GenreModel = model<Genre>("Genre", GenreSchema);
+import { Genre} from "../models";
+import { BookModel, GenreModel, AuthorModel, YearModel } from "../models"
 
 function index(): Promise<Genre[]> {
     return GenreModel.find();
@@ -40,4 +14,27 @@ function get(genreID: String): Promise<Genre> {
         });
 }
 
-export default { index, get };
+function create(json: Genre): Promise<Genre> {
+    const t = new GenreModel(json);
+    return t.save();
+}
+
+function update(genreID: String, genre: Genre): Promise<Genre> {
+    return GenreModel.findOneAndUpdate({ _id: genreID }, genre, {
+        new: true
+    }).then((updated) => {
+        if (!updated) throw `${genreID} not updated`;
+        else return updated as Genre;
+    })
+}
+
+function remove(genreID: String): Promise<void> {
+    return GenreModel.findOneAndDelete({ _id: genreID }).then(
+        (deleted) => {
+            if (!deleted) throw `${genreID} not deleted`;
+        }
+    )
+}
+
+
+export default { index, get, create, update, remove };

@@ -1,31 +1,6 @@
 
-import {Author, Book, Genre, Year} from "../models"
-import { Schema, model } from "mongoose";
-
-const authors: Record<string, Author> = {
-    BrandonSanderson: {
-        name: "Brandon Sanderson",
-        genres: [],
-        books: [],
-        years: []
-    }
-};
-
-export function getAuthor(_: string): Author {
-    return authors["BrandonSanderson"];
-}
-
-const AuthorSchema = new Schema<Author>(
-    {
-        name: { type: String, required: true, trim: true},
-        genres: [{ type: Schema.Types.ObjectId, ref: "Genre"}],
-        books: [{ type: Schema.Types.ObjectId, ref: "Book"}],
-        years: [{ type: Schema.Types.ObjectId, ref: "Year"}],
-    },
-    { collection: "authors"}
-);
-
-const AuthorModel = model<Author>("Author", AuthorSchema);
+import {Author} from "../models"
+import { BookModel, GenreModel, AuthorModel, YearModel } from "../models"
 
 function index(): Promise<Author[]> {
     return AuthorModel.find();
@@ -39,4 +14,27 @@ function get(authorID: String): Promise<Author> {
         });
 }
 
-export default { index, get };
+function create(json: Author): Promise<Author> {
+    const t = new AuthorModel(json);
+    return t.save();
+}
+
+function update(authorID: String, author: Author): Promise<Author> {
+    return AuthorModel.findOneAndUpdate({ _id: authorID }, author, {
+        new: true
+    }).then((updated) => {
+        if (!updated) throw `${authorID} not updated`;
+        else return updated as Author;
+    })
+}
+
+function remove(authorID: String): Promise<void> {
+    return AuthorModel.findOneAndDelete({ _id: authorID }).then(
+        (deleted) => {
+            if (!deleted) throw `${authorID} not deleted`;
+        }
+    )
+}
+
+
+export default { index, get, create, update, remove };

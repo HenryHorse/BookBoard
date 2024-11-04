@@ -1,33 +1,6 @@
 
-import { Year } from "../models/Year"
-import {Author, Genre} from "../models";
-import { Schema, model } from "mongoose";
-
-const years: Record<string, Year> = {
-    year2010: {
-        year: 2010,
-        books: [],
-        authors: [],
-        genres: []
-    }
-}
-
-
-export function getYear(_: string): Year {
-    return years["year2010"];
-}
-
-const YearSchema = new Schema<Year>(
-    {
-        year: { type: Number, required: true, trim: true},
-        books: [{ type: Schema.Types.ObjectId, ref: "Book"}],
-        authors: [{ type: Schema.Types.ObjectId, ref: "Author"}],
-        genres: [{ type: Schema.Types.ObjectId, ref: "Genre"}],
-    },
-    { collection: "years"}
-);
-
-const YearModel = model<Year>("Year", YearSchema);
+import { Year} from "../models/Year"
+import { BookModel, GenreModel, AuthorModel, YearModel } from "../models"
 
 function index(): Promise<Year[]> {
     return YearModel.find();
@@ -41,4 +14,27 @@ function get(yearID: String): Promise<Year> {
         });
 }
 
-export default { index, get };
+function create(json: Year): Promise<Year> {
+    const t = new YearModel(json);
+    return t.save();
+}
+
+function update(yearID: String, year: Year): Promise<Year> {
+    return YearModel.findOneAndUpdate({ _id: yearID }, year, {
+        new: true
+    }).then((updated) => {
+        if (!updated) throw `${yearID} not updated`;
+        else return updated as Year;
+    })
+}
+
+function remove(yearID: String): Promise<void> {
+    return YearModel.findOneAndDelete({ _id: yearID }).then(
+        (deleted) => {
+            if (!deleted) throw `${yearID} not deleted`;
+        }
+    )
+}
+
+
+export default { index, get, create, update, remove };

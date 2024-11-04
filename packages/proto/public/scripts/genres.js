@@ -36,4 +36,42 @@ export class GenreListElement extends HTMLElement {
             .template(GenreListElement.template)
             .styles(reset.styles, GenreListElement.styles);
     }
+
+    get src() {
+        return this.getAttribute("src");
+    }
+
+    connectedCallback() {
+        if (this.src) this.hydrate(this.src);
+    }
+
+    hydrate(url) {
+        fetch(url)
+            .then((res) => {
+                if (res.status !== 200) throw `Status: ${res.status}`;
+                return res.json();
+            })
+            .then((json) => this.renderSlots(json))
+            .catch((error) =>
+                console.log(`Failed to render data ${url}:`, error)
+            );
+    }
+
+    renderSlots(json) {
+        const genres = json.genres;
+        if (genres) {
+            const genreList = html`
+                <ul slot="genre-list">
+                    ${genres.map((genre) => html`
+                            <li>
+                                <a href="../genres/${genre._id}">${genre.name}</a>
+                            </li>
+                        `)}
+                </ul>`;
+            this.replaceChildren(genreList);
+        }
+        else {
+            console.warn("No publication year found in book data.")
+        }
+    }
 }

@@ -1,45 +1,12 @@
-import { Book } from "../models/Book"
-import { getYear } from "./year-svc"
-import { Schema, model } from "mongoose";
-import {Genre, Year} from "../models";
-import "../services/genre-svc"
-import "../services/author-svc"
-
-
-const books: Record<string, Book> = {
-    TWoK: {
-        title: "The Way of Kings",
-        author: [],
-        genres: [],
-        publicationYear: getYear("year2011"),
-        description: "This book is about Roshar and the people who inhabit it."
-    }
-};
-
-export function getBook(_: string): Book {
-    return books['TWoK'];
-}
-
-
-const BookSchema = new Schema<Book>(
-    {
-        title: { type: String, required: true, trim: true},
-        author: [{ type: Schema.Types.ObjectId, ref: "Author"}],
-        genres: [{ type: Schema.Types.ObjectId, ref: "Genre"}],
-        publicationYear: { type: Schema.Types.ObjectId, ref: "Year"},
-        description: { type: String, required: true, trim: true}
-    },
-    { collection: "books"}
-);
-
-const BookModel = model<Book>("Book", BookSchema);
+import { Book } from "../models"
+import { BookModel, GenreModel, AuthorModel, YearModel } from "../models"
 
 function index(): Promise<Book[]> {
     return BookModel.find();
 }
 
 function get(bookID: String): Promise<Book> {
-    return BookModel.find({ title: bookID })
+    return BookModel.find({ _id: bookID })
         .populate("publicationYear")
         .populate("genres")
         .populate("author")
@@ -49,6 +16,26 @@ function get(bookID: String): Promise<Book> {
         });
 }
 
+function create(json: Book): Promise<Book> {
+    const t = new BookModel(json);
+    return t.save();
+}
 
+function update(bookID: String, book: Book): Promise<Book> {
+    return BookModel.findOneAndUpdate({ _id: bookID }, book, {
+        new: true
+    }).then((updated) => {
+        if (!updated) throw `${bookID} not updated`;
+        else return updated as Book;
+    })
+}
 
-export default { index, get };
+function remove(bookID: String): Promise<void> {
+    return BookModel.findOneAndDelete({ _id: bookID }).then(
+        (deleted) => {
+            if (!deleted) throw `${bookID} not deleted`;
+        }
+    )
+}
+
+export default { index, get, create, update, remove };

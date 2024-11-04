@@ -35,7 +35,9 @@ export class BookPage {
     }
 
     renderBody() {
-        const { title, author, genres, publicationYear, description} = this.data;
+        const { _id, title, author, genres, publicationYear, description} = this.data;
+        const bookAPIURL = `/api/books/${_id}`;
+
         return html`
             <body>
                 <bb-header>
@@ -45,9 +47,9 @@ export class BookPage {
                 <div class="page">
                     ${this.renderPageTitle(title)}
                     ${this.renderDescription(description)}
-                    ${this.renderGenreList(genres)}
-                    ${this.renderYear(publicationYear)}
-                    ${this.renderAuthorList(author)}
+                    ${this.renderGenreList(bookAPIURL)}
+                    ${this.renderYear(bookAPIURL)}
+                    ${this.renderAuthorList(bookAPIURL)}
                 </div>
                 <script type="module" src="/scripts/darkModeToggle.js"></script>
             </body>`;
@@ -70,56 +72,26 @@ export class BookPage {
         `
   }
 
-  renderGenreList(genres: Genre[]) {
-        const genreList = genres
-            ? html`
-                    <ul slot="genre-list">
-                        ${genres.map((genre) => html`
-                            <li>
-                                <a href="../genres/${genre.name.toLowerCase()}.html">${genre.name}</a>
-                            </li>
-                        `)}
-                    </ul>`
-            : "";
-
+  renderGenreList(bookAPIURL: string) {
         return html`
             <section class="genre">
-                <genre-list>
-                    ${genreList}
-                </genre-list>
+                <genre-list src="${bookAPIURL}"></genre-list>
             </section>
         `
   }
 
-  renderYear(publicationYear: Year) {
+  renderYear(bookAPIURL: string) {
         return html`
             <section class="year">
-                <year-list>
-                    <ul slot="year-list">
-                        <li>
-                            <a href="../years/${publicationYear.year}.html">${publicationYear.year}</a>
-                        </li>
-                    </ul>
-                </year-list>
+                <year-list src="${bookAPIURL}"></year-list>
             </section>
         `
   }
 
-  renderAuthorList(authors: Author[]) {
-        const authorList = authors
-            ? html`<ul slot="author-list">
-                    ${authors.map((author) => html`
-                            <li>
-                                <a href="../authors/${author.name.replace(/\s+/g, "").toLowerCase()}.html">${author.name}</a>
-                            </li>
-                        `)}
-                </ul>`
-            : "";
+  renderAuthorList(bookAPIURL: string) {
         return html`
             <section class="author">
-                <author-list>
-                    ${authorList}
-                </author-list>
+                <author-list src="${bookAPIURL}"></author-list>
             </section>
         `
   }

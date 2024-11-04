@@ -1,12 +1,12 @@
 // src/index.ts
 import express, { Request, Response } from "express";
 import {BookPage} from "./pages/Book";
-import {getBook} from "./services/mock";
 import { connect } from "./services/mongo"
 import Books from "./services/book-svc"
-import Genres from "./services/genre-svc"
-import Authors from "./services/author-svc"
-import Years from "./services/year-svc"
+import books from "./routes/books"
+import genres from "./routes/genres"
+import years from "./routes/years"
+import authors from "./routes/authors"
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,6 +14,11 @@ const staticDir = process.env.STATIC || "public";
 
 connect("BookBoardDB");
 
+app.use(express.json());
+app.use("/api/books", books);
+app.use("/api/genres", genres);
+app.use("/api/years", years);
+app.use("/api/authors", authors);
 app.use(express.static(staticDir));
 
 app.get("/hello", (req: Request, res: Response) => {
