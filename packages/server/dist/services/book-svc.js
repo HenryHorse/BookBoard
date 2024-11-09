@@ -26,7 +26,11 @@ function index() {
   return import_models2.BookModel.find();
 }
 function get(bookID) {
-  return import_models2.BookModel.find({ _id: bookID }).populate("publicationYear").populate("genres").populate("author").then((list) => list[0]).catch((err) => {
+  return import_models2.BookModel.find({ _id: bookID }).populate([
+    { path: "publicationYear", select: "year" },
+    { path: "genres", select: "name" },
+    { path: "author", select: "name" }
+  ]).then((list) => list[0]).catch((err) => {
     throw err;
   });
 }

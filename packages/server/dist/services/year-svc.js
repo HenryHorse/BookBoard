@@ -26,7 +26,11 @@ function index() {
   return import_models.YearModel.find();
 }
 function get(yearID) {
-  return import_models.YearModel.find({ yearID }).then((list) => list[0]).catch((err) => {
+  return import_models.YearModel.find({ _id: yearID }).populate([
+    { path: "books", select: "title" },
+    { path: "authors", select: "name" },
+    { path: "genres", select: "name" }
+  ]).then((list) => list[0]).catch((err) => {
     throw `${yearID} Not Found`;
   });
 }

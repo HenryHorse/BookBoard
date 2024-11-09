@@ -26,14 +26,14 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var Book_exports = {};
-__export(Book_exports, {
-  BookPage: () => BookPage
+var Author_exports = {};
+__export(Author_exports, {
+  AuthorPage: () => AuthorPage
 });
-module.exports = __toCommonJS(Book_exports);
+module.exports = __toCommonJS(Author_exports);
 var import_server = require("@calpoly/mustang/server");
 var import_renderPage = __toESM(require("./renderPage"));
-class BookPage {
+class AuthorPage {
   data;
   constructor(data) {
     this.data = data;
@@ -41,20 +41,20 @@ class BookPage {
   render() {
     return (0, import_renderPage.default)({
       body: this.renderBody(),
-      stylesheets: ["/styles/book.css"],
+      stylesheets: ["/styles/author.css"],
       styles: [
         import_server.css``
       ],
       scripts: [
         `import { define } from "@calpoly/mustang";
                 import { GenreListElement } from "/scripts/genres.js";
-                import { AuthorListElement} from "/scripts/authors.js";
+                import { BookListElement} from "/scripts/books.js";
                 import {YearListElement} from "/scripts/years.js";
                 import {HeaderElement} from "/scripts/header.js";
     
                 define({
                     "genre-list": GenreListElement,
-                    "author-list": AuthorListElement,
+                    "book-list": BookListElement,
                     "year-list": YearListElement,
                     "bb-header": HeaderElement
                 });`
@@ -63,8 +63,8 @@ class BookPage {
     });
   }
   renderBody() {
-    const { _id, title, description } = this.data;
-    const bookAPIURL = `/api/books/${_id}`;
+    const { _id, name } = this.data;
+    const authorAPIURL = `/api/authors/${_id}`;
     return import_server.html`
             <body>
                 <bb-header>
@@ -72,11 +72,10 @@ class BookPage {
     
     
                 <div class="page">
-                    ${this.renderPageTitle(title)}
-                    ${this.renderDescription(description)}
-                    ${this.renderGenreList(bookAPIURL)}
-                    ${this.renderYear(bookAPIURL)}
-                    ${this.renderAuthorList(bookAPIURL)}
+                    ${this.renderPageTitle(name)}
+                    ${this.renderGenreList(authorAPIURL)}
+                    ${this.renderYearList(authorAPIURL)}
+                    ${this.renderBookList(authorAPIURL)}
                 </div>
                 <script type="module" src="/scripts/darkModeToggle.js"></script>
             </body>`;
@@ -88,37 +87,29 @@ class BookPage {
             </section>
         `;
   }
-  renderDescription(description) {
+  renderGenreList(authorAPIURL) {
     return import_server.html`
-            <section class="description">
-                <h2>Description</h2>
-                <p>${description}</p>
+            <section class="genres">
+                <genre-list src="${authorAPIURL}"></genre-list>
             </section>
         `;
   }
-  renderGenreList(bookAPIURL) {
+  renderYearList(authorAPIURL) {
     return import_server.html`
-            <section class="genre">
-                <genre-list src="${bookAPIURL}"></genre-list>
+            <section class="years">
+                <year-list src="${authorAPIURL}"></year-list>
             </section>
         `;
   }
-  renderYear(bookAPIURL) {
+  renderBookList(authorAPIURL) {
     return import_server.html`
-            <section class="year">
-                <year-list src="${bookAPIURL}"></year-list>
-            </section>
-        `;
-  }
-  renderAuthorList(bookAPIURL) {
-    return import_server.html`
-            <section class="author">
-                <author-list src="${bookAPIURL}"></author-list>
+            <section class="books">
+                <book-list src="${authorAPIURL}"></book-list>
             </section>
         `;
   }
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  BookPage
+  AuthorPage
 });

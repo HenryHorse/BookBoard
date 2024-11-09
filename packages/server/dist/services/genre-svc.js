@@ -26,8 +26,12 @@ function index() {
   return import_models2.GenreModel.find();
 }
 function get(genreID) {
-  return import_models2.GenreModel.find({ genreID }).then((list) => list[0]).catch((err) => {
-    throw `${genreID} Not Found`;
+  return import_models2.GenreModel.find({ _id: genreID }).populate([
+    { path: "books", select: "title" },
+    { path: "authors", select: "name" },
+    { path: "years", select: "year" }
+  ]).then((list) => list[0]).catch((err) => {
+    throw err;
   });
 }
 function create(json) {
