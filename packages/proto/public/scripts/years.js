@@ -58,13 +58,15 @@ export class YearListElement extends HTMLElement {
     }
 
     renderSlots(json) {
-        const publicationYear = json.publicationYear
-        if (publicationYear) {
+        const years = json.years || [json.publicationYear];
+        if (years) {
             const yearElement = html`
                 <ul slot="year-list">
-                    <li>
-                        <a href="../years/${publicationYear._id}">${publicationYear.year}</a>
-                    </li>
+                    ${years.map((year) => html`
+                        <li>
+                            <a href="../years/${year._id}">${year.year}</a>
+                        </li>
+                    `)}
                 </ul>`;
             this.replaceChildren(yearElement);
         }

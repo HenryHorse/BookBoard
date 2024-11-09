@@ -7,7 +7,12 @@ function index(): Promise<Author[]> {
 }
 
 function get(authorID: String): Promise<Author> {
-    return AuthorModel.find({ authorID })
+    return AuthorModel.find({ _id: authorID })
+        .populate([
+            { path: "years", select: "year" },
+            { path: "genres", select: "name" },
+            { path: "books", select: "title" }
+        ])
         .then((list) => list[0])
         .catch((err) => {
             throw `${authorID} Not Found`;

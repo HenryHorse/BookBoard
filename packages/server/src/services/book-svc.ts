@@ -7,9 +7,11 @@ function index(): Promise<Book[]> {
 
 function get(bookID: String): Promise<Book> {
     return BookModel.find({ _id: bookID })
-        .populate("publicationYear")
-        .populate("genres")
-        .populate("author")
+        .populate([
+            { path: "publicationYear", select: "year" },
+            { path: "genres", select: "name" },
+            { path: "author", select: "name" }
+        ])
         .then((list) => list[0])
         .catch((err) => {
             throw err;
