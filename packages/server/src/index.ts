@@ -1,12 +1,19 @@
 // src/index.ts
 import express, { Request, Response } from "express";
-import {BookPage} from "./pages/Book";
 import { connect } from "./services/mongo"
-import Books from "./services/book-svc"
+
+import { Authors, Books, Genres, Years } from "./services"
+
 import books from "./routes/books"
 import genres from "./routes/genres"
 import years from "./routes/years"
 import authors from "./routes/authors"
+
+import {BookPage} from "./pages/Book";
+import {GenrePage} from "./pages/Genre";
+import {YearPage} from "./pages/Year";
+import {AuthorPage} from "./pages/Author";
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -35,6 +42,32 @@ app.get("/books/:bookId", (req: Request, res: Response) => {
 })
 
 
+app.get("/genres/:genreId", (req: Request, res: Response) => {
+    const { genreId } = req.params;
+
+    Genres.get(genreId).then((data) => {
+        const page = new GenrePage(data);
+        res.set("Content-Type", "text/html").send(page.render());
+    })
+})
+
+app.get("/years/:yearId", (req: Request, res: Response) => {
+    const { yearId } = req.params;
+
+    Years.get(yearId).then((data) => {
+        const page = new YearPage(data);
+        res.set("Content-Type", "text/html").send(page.render());
+    })
+})
+
+app.get("/authors/:authorId", (req: Request, res: Response) => {
+    const { authorId } = req.params;
+
+    Authors.get(authorId).then((data) => {
+        const page = new AuthorPage(data);
+        res.set("Content-Type", "text/html").send(page.render());
+    })
+})
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

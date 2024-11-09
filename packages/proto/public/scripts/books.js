@@ -36,4 +36,43 @@ export class BookListElement extends HTMLElement {
             .template(BookListElement.template)
             .styles(reset.styles, BookListElement.styles);
     }
+
+    get src() {
+        return this.getAttribute("src");
+    }
+
+    connectedCallback() {
+        if (this.src) this.hydrate(this.src);
+    }
+
+    hydrate(url) {
+        fetch(url)
+            .then((res) => {
+                if (res.status !== 200) throw `Status: ${res.status}`;
+                return res.json();
+            })
+            .then((json) => this.renderSlots(json))
+            .catch((error) =>
+                console.log(`Failed to render data ${url}:`, error)
+            );
+    }
+
+    renderSlots(json) {
+        const books = json.books;
+        console.log(books);
+        if (books) {
+            const bookList = html`
+                <ul slot="book-list">
+                    ${books.map((book) => html`
+                            <li>
+                                <a href="../books/${book._id}">${book.title}</a>
+                            </li>
+                        `)}
+                </ul>`;
+            this.replaceChildren(bookList);
+        }
+        else {
+            console.warn("No books found in book data.")
+        }
+    }
 }

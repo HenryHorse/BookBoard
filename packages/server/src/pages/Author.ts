@@ -2,30 +2,30 @@ import { css, html } from "@calpoly/mustang/server";
 import { Book, Genre, Author, Year } from "../models";
 import renderPage from "./renderPage"; // generic page renderer
 
-export class BookPage {
-    data: Book;
+export class AuthorPage {
+    data: Author;
 
-    constructor(data: Book) {
+    constructor(data: Author) {
         this.data = data;
     }
 
     render() {
         return renderPage({
             body: this.renderBody(),
-            stylesheets: ["/styles/book.css"],
+            stylesheets: ["/styles/author.css"],
             styles: [
                 css``
             ],
             scripts: [
                 `import { define } from "@calpoly/mustang";
                 import { GenreListElement } from "/scripts/genres.js";
-                import { AuthorListElement} from "/scripts/authors.js";
+                import { BookListElement} from "/scripts/books.js";
                 import {YearListElement} from "/scripts/years.js";
                 import {HeaderElement} from "/scripts/header.js";
     
                 define({
                     "genre-list": GenreListElement,
-                    "author-list": AuthorListElement,
+                    "book-list": BookListElement,
                     "year-list": YearListElement,
                     "bb-header": HeaderElement
                 });`
@@ -35,8 +35,8 @@ export class BookPage {
     }
 
     renderBody() {
-        const { _id, title, description} = this.data;
-        const bookAPIURL = `/api/books/${_id}`;
+        const { _id, name } = this.data;
+        const authorAPIURL = `/api/authors/${_id}`;
 
         return html`
             <body>
@@ -45,56 +45,46 @@ export class BookPage {
     
     
                 <div class="page">
-                    ${this.renderPageTitle(title)}
-                    ${this.renderDescription(description)}
-                    ${this.renderGenreList(bookAPIURL)}
-                    ${this.renderYear(bookAPIURL)}
-                    ${this.renderAuthorList(bookAPIURL)}
+                    ${this.renderPageTitle(name)}
+                    ${this.renderGenreList(authorAPIURL)}
+                    ${this.renderYearList(authorAPIURL)}
+                    ${this.renderBookList(authorAPIURL)}
                 </div>
                 <script type="module" src="/scripts/darkModeToggle.js"></script>
             </body>`;
-  }
+    }
 
-  renderPageTitle(title: string) {
+    renderPageTitle(title: string) {
         return html`
             <section class="page-title">
                 ${title}
             </section>
         `;
-  }
+    }
 
-  renderDescription(description: string) {
+    renderGenreList(authorAPIURL: string) {
         return html`
-            <section class="description">
-                <h2>Description</h2>
-                <p>${description}</p>
+            <section class="genres">
+                <genre-list src="${authorAPIURL}"></genre-list>
             </section>
         `
-  }
+    }
 
-  renderGenreList(bookAPIURL: string) {
+    renderYearList(authorAPIURL: string) {
         return html`
-            <section class="genre">
-                <genre-list src="${bookAPIURL}"></genre-list>
+            <section class="years">
+                <year-list src="${authorAPIURL}"></year-list>
             </section>
         `
-  }
+    }
 
-  renderYear(bookAPIURL: string) {
+    renderBookList(authorAPIURL: string) {
         return html`
-            <section class="year">
-                <year-list src="${bookAPIURL}"></year-list>
+            <section class="books">
+                <book-list src="${authorAPIURL}"></book-list>
             </section>
         `
-  }
-
-  renderAuthorList(bookAPIURL: string) {
-        return html`
-            <section class="author">
-                <author-list src="${bookAPIURL}"></author-list>
-            </section>
-        `
-  }
+    }
 }
 
 

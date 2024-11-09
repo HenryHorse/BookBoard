@@ -58,7 +58,7 @@ export class AuthorListElement extends HTMLElement {
     }
 
     renderSlots(json) {
-        const authors = json.author;
+        const authors = json.authors || json.author;
         if (authors) {
             const authorList = html`
                 <ul slot="author-list">
@@ -71,7 +71,7 @@ export class AuthorListElement extends HTMLElement {
             this.replaceChildren(authorList);
         }
         else {
-            console.warn("No publication year found in book data.")
+            console.warn("No authors found in book data.")
         }
     }
 }

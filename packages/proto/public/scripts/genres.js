@@ -71,7 +71,7 @@ export class GenreListElement extends HTMLElement {
             this.replaceChildren(genreList);
         }
         else {
-            console.warn("No publication year found in book data.")
+            console.warn("No genres found in book data.")
         }
     }
 }

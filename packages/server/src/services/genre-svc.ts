@@ -7,10 +7,15 @@ function index(): Promise<Genre[]> {
 }
 
 function get(genreID: String): Promise<Genre> {
-    return GenreModel.find({ genreID })
+    return GenreModel.find({ _id: genreID })
+        .populate([
+            { path: "books", select: "title" },
+            { path: "authors", select: "name" },
+            { path: "years", select: "year" }
+        ])
         .then((list) => list[0])
         .catch((err) => {
-            throw `${genreID} Not Found`;
+            throw err;
         });
 }
 
