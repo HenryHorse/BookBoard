@@ -1,4 +1,4 @@
-import { css, html, shadow } from "@calpoly/mustang"
+import {css, html, Observer, shadow} from "@calpoly/mustang"
 import reset from "./styles/reset.css.js"
 
 export class GenreListElement extends HTMLElement {
@@ -41,12 +41,25 @@ export class GenreListElement extends HTMLElement {
         return this.getAttribute("src");
     }
 
+    _authObserver = new Observer(this, "bb:auth");
+
+    get authorization() {
+        return (
+            this._user?.authenticated && {
+                Authorization: `Bearer ${this._user.token}`
+            }
+        );
+    }
+
     connectedCallback() {
-        if (this.src) this.hydrate(this.src);
+        this._authObserver.observe(({ user }) => {
+            this._user = user;
+            if (this.src) this.hydrate(this.src);
+        });
     }
 
     hydrate(url) {
-        fetch(url)
+        fetch(url, { headers: this.authorization })
             .then((res) => {
                 if (res.status !== 200) throw `Status: ${res.status}`;
                 return res.json();
@@ -58,7 +71,7 @@ export class GenreListElement extends HTMLElement {
     }
 
     renderSlots(json) {
-        const genres = json.genres;
+        const genres = Array.isArray(json) ? json : json.genres;
         if (genres) {
             const genreList = html`
                 <ul slot="genre-list">

@@ -17,13 +17,15 @@ export class BookPage {
                 css``
             ],
             scripts: [
-                `import { define } from "@calpoly/mustang";
+                `import { define, Auth } from "@calpoly/mustang";
                 import { GenreListElement } from "/scripts/genres.js";
                 import { AuthorListElement} from "/scripts/authors.js";
                 import {YearListElement} from "/scripts/years.js";
                 import {HeaderElement} from "/scripts/header.js";
+       
     
                 define({
+                    "mu-auth": Auth.Provider,
                     "genre-list": GenreListElement,
                     "author-list": AuthorListElement,
                     "year-list": YearListElement,
@@ -40,61 +42,62 @@ export class BookPage {
 
         return html`
             <body>
-                <bb-header>
-                </bb-header>
-    
-    
-                <div class="page">
-                    ${this.renderPageTitle(title)}
-                    ${this.renderDescription(description)}
-                    ${this.renderGenreList(bookAPIURL)}
-                    ${this.renderYear(bookAPIURL)}
-                    ${this.renderAuthorList(bookAPIURL)}
-                </div>
-                <script type="module" src="/scripts/darkModeToggle.js"></script>
+                <mu-auth provides="bb:auth">
+                    <bb-header></bb-header>
+        
+        
+                    <div class="page">
+                        ${this.renderPageTitle(title)}
+                        ${this.renderDescription(description)}
+                        ${this.renderGenreList(bookAPIURL)}
+                        ${this.renderYear(bookAPIURL)}
+                        ${this.renderAuthorList(bookAPIURL)}
+                    </div>
+                    <script type="module" src="/scripts/darkModeToggle.js"></script>
+                </mu-auth>
             </body>`;
-  }
+    }
 
-  renderPageTitle(title: string) {
+    renderPageTitle(title: string) {
         return html`
             <section class="page-title">
                 ${title}
             </section>
         `;
-  }
+    }
 
-  renderDescription(description: string) {
+    renderDescription(description: string) {
         return html`
             <section class="description">
                 <h2>Description</h2>
                 <p>${description}</p>
             </section>
         `
-  }
+    }
 
-  renderGenreList(bookAPIURL: string) {
+    renderGenreList(bookAPIURL: string) {
         return html`
             <section class="genre">
                 <genre-list src="${bookAPIURL}"></genre-list>
             </section>
         `
-  }
+    }
 
-  renderYear(bookAPIURL: string) {
+    renderYear(bookAPIURL: string) {
         return html`
             <section class="year">
                 <year-list src="${bookAPIURL}"></year-list>
             </section>
         `
-  }
+    }
 
-  renderAuthorList(bookAPIURL: string) {
+    renderAuthorList(bookAPIURL: string) {
         return html`
             <section class="author">
                 <author-list src="${bookAPIURL}"></author-list>
             </section>
         `
-  }
+    }
 }
 
 

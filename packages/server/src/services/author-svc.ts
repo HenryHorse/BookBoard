@@ -1,6 +1,6 @@
 
 import {Author} from "../models"
-import { BookModel, GenreModel, AuthorModel, YearModel } from "../models"
+import { AuthorModel } from "../models"
 
 function index(): Promise<Author[]> {
     return AuthorModel.find();

@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { Book } from "../models/Book"
+import { Book } from "../models"
 
 import Books from "../services/book-svc"
 

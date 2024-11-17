@@ -11,77 +11,75 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+        <script type="importmap">
+            {
+              "imports": {
+                "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+              }
+            }
+        </script>
+        <script type="module">
+            import { define, Auth } from "@calpoly/mustang";
+            import { HeaderElement } from "/scripts/header.js";
+
+            define({
+                "bb-header": HeaderElement,
+                "mu-auth": Auth.Provider
+            });
+        </script>
     </head>
     <body>
-        <header>
-            <div class="left-header">
-                <h1>
-                    Book Board
-                </h1>
-                <nav>
-                    <a class="active" href="/index.html">Home</a>
-                    <a href="/books.html">Books</a>
-                    <a href="/genres.html">Genres</a>
-                    <a href="/authors.html">Authors</a>
-                    <a href="/years.html">Years</a>
-                </nav>
+        <mu-auth provides="bb:auth">
+            <bb-header></bb-header>
+
+            <div class="page">
+                <section class="books">
+                    <h2>
+                        <svg class="icon">
+                            <use href="/icons/books.svg#icon-books"/>
+                        </svg>
+                        My Books
+                    </h2>
+                    <ul>
+                        <li>
+                            <a href="books/6726d8594c1f1785b3cc1e89">The Way of Kings</a>
+                        </li>
+                        <li>The Left Hand of Darkness</li>
+                        <li>Circe</li>
+                        <li>Oathbringer</li>
+                    </ul>
+                </section>
+
+                <section class="genres">
+                    <h2>
+                        <svg class="icon">
+                            <use href="/icons/books.svg#icon-love"/>
+                        </svg>
+                        My Genres
+                    </h2>
+                    <ul>
+                        <li>
+                            <a href="genres/6726d9414c1f1785b3cc1e94">Fantasy</a>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="authors">
+                    <h2>
+                        <svg class="icon">
+                            <use href="/icons/books.svg#icon-idea"/>
+                        </svg>
+                        My Authors
+                    </h2>
+                    <ul>
+                        <li>
+                            <a href="authors/6726d9014c1f1785b3cc1e91">Brandon Sanderson</a>
+                        </li>
+                    </ul>
+                </section>
+
             </div>
-            <label onchange="event.stopPropagation(); toggleDarkMode(document.body, event.target.checked)">
-                <input type="checkbox"/>
-                Dark Mode
-            </label>
-            <div class="login">
-                <a href="">Login</a>
-            </div>
-        </header>
-
-        <div class="page">
-            <section class="books">
-                <h2>
-                    <svg class="icon">
-                        <use href="/icons/books.svg#icon-books"/>
-                    </svg>
-                    My Books
-                </h2>
-                <ul>
-                    <li>
-                        <a href="books/6726d8594c1f1785b3cc1e89">The Way of Kings</a>
-                    </li>
-                    <li>The Left Hand of Darkness</li>
-                    <li>Circe</li>
-                    <li>Oathbringer</li>
-                </ul>
-            </section>
-
-            <section class="genres">
-                <h2>
-                    <svg class="icon">
-                        <use href="/icons/books.svg#icon-love"/>
-                    </svg>
-                    My Genres
-                </h2>
-                <ul>
-                    <li>
-                        <a href="genres/6726d9414c1f1785b3cc1e94">Fantasy</a>
-                    </li>
-                </ul>
-            </section>
-
-            <section class="authors">
-                <h2>
-                    <svg class="icon">
-                        <use href="/icons/books.svg#icon-idea"/>
-                    </svg>
-                    My Authors
-                </h2>
-                <ul>
-                    <li>
-                        <a href="authors/6726d9014c1f1785b3cc1e91">Brandon Sanderson</a>
-                    </li>
-                </ul>
-            </section>
-
-        </div>
-        <script type="module" src="/scripts/darkModeToggle.js"></script>
+            <script type="module" src="/scripts/darkModeToggle.js"></script>
+        </mu-auth>
     </body>
 </html>

@@ -18,43 +18,26 @@
             }
         </script>
         <script type="module">
-            import { define } from "@calpoly/mustang";
+            import { define, Auth } from "@calpoly/mustang";
             import {YearListElement} from "/scripts/years.js";
+            import { HeaderElement } from "/scripts/header.js";
 
             define({
+                "mu-auth": Auth.Provider,
+                "bb-header": HeaderElement,
                 "year-list": YearListElement
             });
         </script>
     </head>
     <body>
-        <header>
-            <div class="left-header">
-                <h1>
-                    Book Board
-                </h1>
-                <nav>
-                    <a href="/index.html">Home</a>
-                    <a href="/books.html">Books</a>
-                    <a href="/genres.html">Genres</a>
-                    <a href="/authors.html">Authors</a>
-                    <a class="active" href="/years.html">Years</a>
-                </nav>
+        <mu-auth provides="bb:auth">
+            <bb-header></bb-header>
+            <div class="page">
+                <section>
+                    <year-list src="/api/years"></year-list>
+                </section>
             </div>
-            <div class="login">
-                <a href="">Login</a>
-            </div>
-        </header>
-
-        <div class="page">
-            <section>
-                <year-list>
-                    <ul slot="year-list">
-                        <li>
-                            <a href="years/6726d9924c1f1785b3cc1e97">2010</a>
-                        </li>
-                    </ul>
-                </year-list>
-            </section>
-        </div>
+            <script type="module" src="/scripts/darkModeToggle.js"></script>
+        </mu-auth>
     </body>
 </html>

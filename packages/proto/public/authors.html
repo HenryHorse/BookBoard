@@ -18,49 +18,27 @@
             }
         </script>
         <script type="module">
-            import { define } from "@calpoly/mustang";
+            import { define, Auth } from "@calpoly/mustang";
             import { AuthorListElement} from "/scripts/authors.js";
+            import { HeaderElement } from "/scripts/header.js";
 
             define({
+                "mu-auth": Auth.Provider,
+                "bb-header": HeaderElement,
                 "author-list": AuthorListElement,
             });
         </script>
     </head>
     <body>
-        <header>
-            <div class="left-header">
-                <h1>
-                    Book Board
-                </h1>
-                <nav>
-                    <a href="/index.html">Home</a>
-                    <a href="/books.html">Books</a>
-                    <a href="/genres.html">Genres</a>
-                    <a class="active" href="/authors.html">Authors</a>
-                    <a href="/years.html">Years</a>
-                </nav>
-            </div>
-            <div class="login">
-                <a href="">Login</a>
-            </div>
-        </header>
+        <mu-auth provides="bb:auth">
+            <bb-header></bb-header>
 
-        <div class="page">
-            <section>
-                <author-list>
-                    <ul slot="author-list">
-                        <li>
-                            <a href="authors/6726d9014c1f1785b3cc1e91">Brandon Sanderson</a>
-                        </li>
-                        <li>john</li>
-                        <li>john</li>
-                        <li>john</li>
-                        <li>john</li>
-                        <li>john</li>
-                    </ul>
-                </author-list>
-            </section>
-        </div>
-
+            <div class="page">
+                <section>
+                    <author-list src="/api/authors"></author-list>
+                </section>
+            </div>
+            <script type="module" src="/scripts/darkModeToggle.js"></script>
+        </mu-auth>
     </body>
 </html>

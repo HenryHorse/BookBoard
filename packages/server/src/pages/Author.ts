@@ -17,13 +17,14 @@ export class AuthorPage {
                 css``
             ],
             scripts: [
-                `import { define } from "@calpoly/mustang";
+                `import { define, Auth } from "@calpoly/mustang";
                 import { GenreListElement } from "/scripts/genres.js";
                 import { BookListElement} from "/scripts/books.js";
                 import {YearListElement} from "/scripts/years.js";
                 import {HeaderElement} from "/scripts/header.js";
     
                 define({
+                    "mu-auth": Auth.Provider,
                     "genre-list": GenreListElement,
                     "book-list": BookListElement,
                     "year-list": YearListElement,
@@ -40,17 +41,19 @@ export class AuthorPage {
 
         return html`
             <body>
-                <bb-header>
-                </bb-header>
-    
-    
-                <div class="page">
-                    ${this.renderPageTitle(name)}
-                    ${this.renderGenreList(authorAPIURL)}
-                    ${this.renderYearList(authorAPIURL)}
-                    ${this.renderBookList(authorAPIURL)}
-                </div>
-                <script type="module" src="/scripts/darkModeToggle.js"></script>
+                <mu-auth provides="bb:auth">
+                    <bb-header>
+                    </bb-header>
+        
+        
+                    <div class="page">
+                        ${this.renderPageTitle(name)}
+                        ${this.renderGenreList(authorAPIURL)}
+                        ${this.renderYearList(authorAPIURL)}
+                        ${this.renderBookList(authorAPIURL)}
+                    </div>
+                    <script type="module" src="/scripts/darkModeToggle.js"></script>
+                </mu-auth>
             </body>`;
     }
 

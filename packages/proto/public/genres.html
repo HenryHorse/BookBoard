@@ -18,44 +18,26 @@
             }
         </script>
         <script type="module">
-            import { define } from "@calpoly/mustang";
+            import { define, Auth } from "@calpoly/mustang";
             import {GenreListElement} from "/scripts/genres.js";
+            import { HeaderElement } from "/scripts/header.js";
 
             define({
-               "genre-list": GenreListElement
+                "mu-auth": Auth.Provider,
+                "bb-header": HeaderElement,
+                "genre-list": GenreListElement
             });
         </script>
     </head>
     <body>
-        <header>
-            <div class="left-header">
-                <h1>
-                    Book Board
-                </h1>
-                <nav>
-                    <a href="/index.html">Home</a>
-                    <a href="/books.html">Books</a>
-                    <a class="active" href="/genres.html">Genres</a>
-                    <a href="/authors.html">Authors</a>
-                    <a href="/years.html">Years</a>
-                </nav>
+        <mu-auth provides="bb:auth">
+            <bb-header></bb-header>
+            <div class="page">
+                <section>
+                    <genre-list src="/api/genres"></genre-list>
+                </section>
             </div>
-            <div class="login">
-                <a href="">Login</a>
-            </div>
-        </header>
-
-
-        <section>
-            <genre-list>
-                <ul slot="genre-list">
-                    <li>
-                        <a href="genres/6726d9414c1f1785b3cc1e94">Fantasy</a>
-                    </li>
-                </ul>
-            </genre-list>
-        </section>
-
-
+            <script type="module" src="/scripts/darkModeToggle.js"></script>
+        </mu-auth>
     </body>
 </html>

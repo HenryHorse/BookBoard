@@ -43,6 +43,7 @@ section {
     font-family: var(--font-family-section);
     border-radius: var(--section-border-radius);
     box-shadow: var(--shadow);
+
 }
 section a {
     color: var(--color-text);

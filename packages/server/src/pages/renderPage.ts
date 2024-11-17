@@ -1,4 +1,3 @@
-// src/pages/renderPage.ts
 import {
     PageParts,
     renderWithDefaults
