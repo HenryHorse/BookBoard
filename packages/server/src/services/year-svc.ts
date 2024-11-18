@@ -27,10 +27,16 @@ function create(json: Year): Promise<Year> {
 function update(yearID: String, year: Year): Promise<Year> {
     return YearModel.findOneAndUpdate({ _id: yearID }, year, {
         new: true
-    }).then((updated) => {
-        if (!updated) throw `${yearID} not updated`;
-        else return updated as Year;
     })
+        .populate([
+            { path: "books", select: "title" },
+            { path: "authors", select: "name" },
+            { path: "genres", select: "name" }
+        ])
+        .then((updated) => {
+            if (!updated) throw `${yearID} not updated`;
+            else return updated as Year;
+        })
 }
 
 function remove(yearID: String): Promise<void> {

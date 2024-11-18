@@ -27,10 +27,16 @@ function create(json: Genre): Promise<Genre> {
 function update(genreID: String, genre: Genre): Promise<Genre> {
     return GenreModel.findOneAndUpdate({ _id: genreID }, genre, {
         new: true
-    }).then((updated) => {
-        if (!updated) throw `${genreID} not updated`;
-        else return updated as Genre;
     })
+        .populate([
+            { path: "books", select: "title" },
+            { path: "authors", select: "name" },
+            { path: "years", select: "year" }
+        ])
+        .then((updated) => {
+            if (!updated) throw `${genreID} not updated`;
+            else return updated as Genre;
+        })
 }
 
 function remove(genreID: String): Promise<void> {
