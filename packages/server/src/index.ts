@@ -1,6 +1,8 @@
 // src/index.ts
 import express, { Request, Response } from "express";
 import { connect } from "./services/mongo"
+import fs from "node:fs/promises";
+import path from "path";
 
 import { Authors, Books, Genres, Years } from "./services"
 
@@ -13,7 +15,6 @@ import {BookPage} from "./pages/Book";
 import {GenrePage} from "./pages/Genre";
 import {YearPage} from "./pages/Year";
 import {AuthorPage} from "./pages/Author";
-import { LoginPage, RegisterPage } from "./pages/auth"
 
 import auth, { authenticateUser } from "./routes/auth"
 
@@ -32,10 +33,6 @@ app.use("/api/authors", authenticateUser, authors);
 app.use("/auth", auth);
 app.use(express.static(staticDir));
 
-
-app.get("/hello", (req: Request, res: Response) => {
-    res.send("<h2>Hello World!</h2>");
-});
 
 app.get("/books/:bookId", (req: Request, res: Response) => {
     const { bookId } = req.params;
@@ -74,14 +71,11 @@ app.get("/authors/:authorId", (req: Request, res: Response) => {
     })
 })
 
-app.get("/login", (req: Request, res: Response) => {
-    const page = new LoginPage();
-    res.set("Content-Type", "text/html").send(page.render());
-});
-
-app.get("/register", (req: Request, res: Response) => {
-    const page = new RegisterPage();
-    res.set("Content-Type", "text/html").send(page.render());
+app.use("/app", (req: Request, res: Response) => {
+    const indexHtml = path.resolve(staticDir, "index.html");
+    fs.readFile(indexHtml, { encoding: "utf8" }).then((html) =>
+        res.send(html)
+    );
 });
 
 app.listen(port, () => {

@@ -1,0 +1,59 @@
+:root {
+    --color-background-header: rgba(55, 28, 1, 0.93);
+    --color-background-page: rgb(159, 115, 85);
+    --color-background-section: rgb(66, 104, 67);
+    --color-hover: rgb(131 126 246);
+    --color-text: rgb(246, 229, 219);
+    --color-border-section: rgb(69, 151, 73);
+    --color-border-login: rgb(117, 82, 38);
+    --color-background-login: rgb(74, 48, 15);
+    --color-active-nav: rgb(139, 115, 85);
+    --color-title: rgba(81, 43, 12, 0.93);
+
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+
+    --header-padding: 1rem;
+    --header-margin-bottom: 1rem;
+
+    --section-column-gap: 1rem;
+    --section-row-gap: 1rem;
+    --section-border-radius: 8px;
+    --section-padding: 1rem;
+
+
+    --font-family-section: 'EB Garamond', serif;
+    --font-family-header: 'Lobster Two', sans-serif;
+    --font-family-login: 'EB Garamond', serif;
+
+    --home-column-split: repeat(4, 1fr);
+    --page-column-split: repeat(2, 1fr);
+
+    --style-border-section: solid;
+    --style-border-header: solid;
+
+    --icon-height: 2rem;
+    --icon-width: 2rem;
+
+    --list-gap: 1rem;
+
+    --title-font-size: 2rem;
+    --title-padding: 0.5rem 1rem;
+
+    --login-padding: 0.75rem;
+    --login-font-size: 1rem;
+
+
+}
+
+body.dark-mode {
+    --color-background-header: rgba(30, 14, 1, 0.93);
+    --color-background-page: rgb(94, 68, 45);
+    --color-background-section: rgb(49, 81, 50);
+    --color-hover: rgb(111, 107, 197);
+    --color-text: rgb(246, 229, 219);
+    --color-border-section: rgb(49, 103, 51);
+    --color-border-login: rgb(76, 55, 24);
+    --color-background-login: rgb(44, 28, 9);
+    --color-active-nav: rgb(89, 73, 53);
+    --color-title: rgba(60, 31, 9, 0.93);
+}

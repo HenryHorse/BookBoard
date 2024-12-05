@@ -73,12 +73,6 @@ export class BookListElement extends HTMLElement {
             margin: 1rem auto;
         }
         
-        section.view {
-            display: var(--display-view-none, grid);
-        }
-        mu-form.edit {
-            display: var(--display-editor-none, grid);
-        }
     `;
 
     static uses = define({
