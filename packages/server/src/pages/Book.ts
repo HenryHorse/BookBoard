@@ -12,7 +12,7 @@ export class BookPage {
     render() {
         return renderPage({
             body: this.renderBody(),
-            stylesheets: ["/styles/book.css"],
+            stylesheets: ["/css/book.css"],
             styles: [
                 css``
             ],

@@ -11,29 +11,22 @@ export class BookListElement extends LitElement {
 
     static styles = css`
         svg.icon {
-          display: inline;
-          height: var(--icon-height);
-          width: var(--icon-width);
-          vertical-align: bottom;
-          fill: currentColor;
+            display: inline;
+            height: var(--icon-height);
+            width: var(--icon-width);
+            vertical-align: bottom;
+            fill: currentColor;
         }
         h2 {
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-        }
-        ul {
-          list-style: none;
-          padding: 0;
-        }
-        li {
-          margin: 0.5rem 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
         }
         a {
-          text-decoration: none;
+            color: var(--color-text)
         }
         a:hover {
-          color: var(--color-hover);
+            color: var(--color-hover);
         }
   `;
 
@@ -77,7 +70,7 @@ export class BookListElement extends LitElement {
         return html`
           <h2>
             <svg class="icon">
-              <use href="/icons/books.svg#icon-love"></use>
+              <use href="/icons/books.svg#icon-books"></use>
             </svg>
             Books
           </h2>

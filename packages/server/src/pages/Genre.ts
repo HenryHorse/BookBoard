@@ -12,7 +12,7 @@ export class GenrePage {
     render() {
         return renderPage({
             body: this.renderBody(),
-            stylesheets: ["/styles/genre.css"],
+            stylesheets: ["/css/genre.css"],
             styles: [
                 css``
             ],

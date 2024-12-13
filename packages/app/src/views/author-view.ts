@@ -1,20 +1,20 @@
 import { View } from "@calpoly/mustang";
 import { html } from "lit";
 import {property, state} from "lit/decorators.js";
-import { Genre } from "server/models";
+import { Author } from "server/models";
 import { Msg } from "../messages";
 import { Model } from "../model";
 import pageStyle from "../css/page";
 import resetStyle from "../css/reset";
-import genreStyle from "../css/genre";
+import authorStyle from "../css/author";
 
-export class GenreViewElement extends View<Model, Msg> {
+export class AuthorViewElement extends View<Model, Msg> {
     @property()
-    genreid?: string;
+    authorid?: string;
 
     @state()
-    get genre(): Genre | undefined {
-        return this.model.genre;
+    get author(): Author | undefined {
+        return this.model.author;
     }
 
     constructor() {
@@ -24,38 +24,38 @@ export class GenreViewElement extends View<Model, Msg> {
     render() {
         return html`
           <div class="page">
-            ${this.genre
+            ${this.author
             ? html`
               <section class="page-title">
-                <h1>${this.genre.name}</h1>
+                <h1>${this.author.name}</h1>
               </section>
               <section class="books">
-                  <book-list src="/api/genres/${this.genre._id}"></book-list>
+                  <book-list src="/api/authors/${this.author._id}"></book-list>
               </section>
               <section class="years">
-                  <year-list src="/api/genres/${this.genre._id}"></year-list>
+                  <year-list src="/api/authors/${this.author._id}"></year-list>
               </section>
-              <section class="authors">
-                  <author-list src="/api/genres/${this.genre._id}"></author-list>
+              <section class="genres">
+                  <genre-list src="/api/authors/${this.author._id}"></genre-list>
               </section>
             `
             : html`
-                  <p>Loading genre details...</p>
+                  <p>Loading author details...</p>
                 `}
           </div>
         `;
     }
 
     static styles = [
-        resetStyle,
+        authorStyle,
         pageStyle,
-        genreStyle
+        resetStyle,
     ]
 
     connectedCallback() {
         super.connectedCallback();
-        if (this.genreid) {
-            this.dispatchMessage(["genre/select", { genreid: this.genreid }]);
+        if (this.authorid) {
+            this.dispatchMessage(["author/select", { authorid: this.authorid }]);
         }
     }
 }

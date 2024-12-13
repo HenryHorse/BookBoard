@@ -22,15 +22,8 @@ export class GenreListElement extends LitElement {
           align-items: flex-end;
           justify-content: center;
         }
-        ul {
-          list-style: none;
-          padding: 0;
-        }
-        li {
-          margin: 0.5rem 0;
-        }
         a {
-          text-decoration: none;
+            color: var(--color-text)
         }
         a:hover {
           color: var(--color-hover);

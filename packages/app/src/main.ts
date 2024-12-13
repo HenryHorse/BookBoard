@@ -13,6 +13,12 @@ import {BookListElement} from "./components/book-list.ts";
 import {AuthorListElement} from "./components/author-list.ts";
 import {YearListElement} from "./components/year-list.ts";
 import {GenreViewElement} from "./views/genre-view.ts";
+import {AllBooksViewElement} from "./views/all-books-view.ts";
+import {AllYearsViewElement} from "./views/all-years-view.ts";
+import {AllAuthorsViewElement} from "./views/all-authors-view.ts";
+import {AllGenresViewElement} from "./views/all-genres-view.ts";
+import {AuthorViewElement} from "./views/author-view.ts";
+import {YearViewElement} from "./views/year-view.ts";
 
 
 
@@ -24,9 +30,45 @@ const routes = [
         `
     },
     {
+        path: "/app/books",
+        view: () => html`
+          <all-books-view></all-books-view>
+        `
+    },
+    {
         path: "/app/genres/:genreid",
         view: (params: Switch.Params) => html`
-          <genre-view genreid=${params.genreid}></genre-view>
+            <genre-view genreid=${params.genreid}></genre-view>
+        `
+    },
+    {
+        path: "/app/genres",
+        view: () => html`
+          <all-genres-view></all-genres-view>
+        `
+    },
+    {
+        path: "/app/years/:yearid",
+        view: (params: Switch.Params) => html`
+          <year-view yearid=${params.yearid}></year-view>
+        `
+    },
+    {
+        path: "/app/years",
+        view: () => html`
+          <all-years-view></all-years-view>
+        `
+    },
+    {
+        path: "/app/authors/:authorid",
+        view: (params: Switch.Params) => html`
+          <author-view authorid=${params.authorid}></author-view>
+        `
+    },
+    {
+        path: "/app/authors",
+        view: () => html`
+          <all-authors-view></all-authors-view>
         `
     },
     {
@@ -75,5 +117,11 @@ define({
     "register-view": RegisterViewElement,
     "home-view": HomeViewElement,
     "book-view": BookViewElement,
-    "genre-view": GenreViewElement
+    "genre-view": GenreViewElement,
+    "author-view": AuthorViewElement,
+    "year-view": YearViewElement,
+    "all-books-view": AllBooksViewElement,
+    "all-years-view": AllYearsViewElement,
+    "all-authors-view": AllAuthorsViewElement,
+    "all-genres-view": AllGenresViewElement
 });

@@ -1,7 +1,10 @@
 import { Auth, Observer } from "@calpoly/mustang";
-import { css, html, LitElement } from "lit";
+import { html, LitElement } from "lit";
 import { state } from "lit/decorators.js";
 import { Book, Author, Genre } from "server/models";
+import pageStyle from "../css/page";
+import resetStyle from "../css/reset";
+import homeStyle from "../css/home";
 
 export class HomeViewElement extends LitElement {
     bookSrc = "/api/books";
@@ -39,25 +42,11 @@ export class HomeViewElement extends LitElement {
 
     }
 
-    static styles = css`
-        section {
-            color: var(--color-text);
-            background-color: var(--color-background-section);
-            border-style: var(--style-border-section);
-            border-color: var(--color-border-section);
-            padding: var(--section-padding);
-            font-family: var(--font-family-section);
-            border-radius: var(--section-border-radius);
-            box-shadow: var(--shadow);
-
-        }
-        section a {
-            color: var(--color-text);
-        }
-        section a:hover {
-            color: var(--color-hover);
-        }
-    `
+    static styles = [
+        resetStyle,
+        pageStyle,
+        homeStyle,
+    ]
 
     renderBook(book: Book) {
         return html`<li><a href="/app/books/${book._id}">${book.title}</a></li>`;

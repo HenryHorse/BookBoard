@@ -12,7 +12,7 @@ export class YearPage {
     render() {
         return renderPage({
             body: this.renderBody(),
-            stylesheets: ["/styles/year.css"],
+            stylesheets: ["/css/year.css"],
             styles: [
                 css``
             ],

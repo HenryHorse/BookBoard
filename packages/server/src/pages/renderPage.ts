@@ -5,9 +5,9 @@ import {
 
 const defaults = {
     stylesheets: [
-        "/styles/reset.css",
-        "/styles/tokens.css",
-        "/styles/page.css"
+        "/css/reset.css",
+        "/css/tokens.css",
+        "/css/page.css"
     ],
     styles: [],
     googleFontURL:

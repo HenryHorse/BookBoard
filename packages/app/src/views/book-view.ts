@@ -1,9 +1,12 @@
 import { define, Form, InputArray, View, History } from "@calpoly/mustang";
-import { css, html } from "lit";
+import { html } from "lit";
 import {property, state} from "lit/decorators.js";
 import { Book } from "server/models";
 import { Msg } from "../messages";
 import { Model } from "../model";
+import bookStyle from "../css/book";
+import pageStyle from "../css/page";
+import resetStyle from "../css/reset";
 
 
 
@@ -70,13 +73,6 @@ export class BookViewElement extends View<Model, Msg> {
     }
 
     renderEditMode() {
-        const initData = {
-            title: this.book?.title,
-            description: this.book?.description,
-            genres: this.book?.genres.map(g => g.name) || [],
-            authors: this.book?.author.map(a => a.name) || [],
-            years: this.book?.publicationYear.year || []
-        }
         return html`
             <div class="page">
                 <section>
@@ -85,7 +81,7 @@ export class BookViewElement extends View<Model, Msg> {
                         <a class="close" href="#" @click=${() => (this.editMode = false)}>Close</a>
                     </nav>
                     <mu-form 
-                            .init=${initData} @mu-form:submit=${this._handleSubmit}>
+                            .init=${this.book} @mu-form:submit=${this._handleSubmit}>
                         <label>
                             <span>Title</span>
                             <input name="title"/>
@@ -93,24 +89,6 @@ export class BookViewElement extends View<Model, Msg> {
                         <label>
                             <span>Description</span>
                             <textarea name="description"></textarea>
-                        </label>
-                        <label>
-                            <span>Genres</span>
-                            <input-array name="genres">
-                                <span slot="label-add">Add a genre</span>
-                            </input-array>
-                        </label>
-                        <label>
-                            <span>Authors</span>
-                            <input-array name="authors">
-                                <span slot="label-add">Add an author</span>
-                            </input-array>
-                        </label>
-                        <label>
-                            <span>Years</span>
-                            <input-array name="years">
-                                <span slot="label-add">Add a year</span>
-                            </input-array>
                         </label>
                     </mu-form>
                 </section>
@@ -136,25 +114,11 @@ export class BookViewElement extends View<Model, Msg> {
         this.editMode = false;
     }
 
-    static styles = css`
-        section {
-            color: var(--color-text);
-            background-color: var(--color-background-section);
-            border-style: var(--style-border-section);
-            border-color: var(--color-border-section);
-            padding: var(--section-padding);
-            font-family: var(--font-family-section);
-            border-radius: var(--section-border-radius);
-            box-shadow: var(--shadow);
-
-        }
-        section a {
-            color: var(--color-text);
-        }
-        section a:hover {
-            color: var(--color-hover);
-        }
-    `
+    static styles = [
+        bookStyle,
+        pageStyle,
+        resetStyle
+    ];
 
 
 }

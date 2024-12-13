@@ -12,7 +12,7 @@ export class AuthorPage {
     render() {
         return renderPage({
             body: this.renderBody(),
-            stylesheets: ["/styles/author.css"],
+            stylesheets: ["/css/author.css"],
             styles: [
                 css``
             ],
